@@ -1,0 +1,228 @@
+---
+import '../styles/global.css'
+import SkipLink from '../components/ui/SkipLink.astro'
+
+// ─── Datos del sitio ───────────────────────────────────────────────
+// Editar aquí para actualizar SEO en todo el sitio
+const SITE_TITLE = 'Sarah Murcia | UX/UI Designer & Frontend Developer'
+const SITE_DESCRIPTION =
+  'Portafolio de Sarah Murcia — UX/UI Design Junior y Frontend Junior. Proyectos de diseño centrado en el usuario y desarrollo web.'
+const SITE_AUTHOR = 'Sarah Murcia'
+const SITE_KEYWORDS =
+  'UX designer, UI designer, frontend developer, portafolio, diseño web, React, Figma'
+
+// ─── URLs canónicas ────────────────────────────────────────────────
+// Astro.site se define en astro.config.mjs via PUBLIC_SITE_URL
+const canonicalBase = Astro.site ?? new URL('http://localhost:4321')
+const canonicalUrl = new URL(Astro.url.pathname, canonicalBase).href
+const ogImage = new URL('/og-image.png', canonicalBase).href
+---
+
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <!-- Charset y viewport -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicons multi-formato (reemplazar con los definitivos) -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Meta básicos SEO -->
+    <meta name="generator" content={Astro.generator} />
+    <title>{SITE_TITLE}</title>
+    <meta name="description" content={SITE_DESCRIPTION} />
+    <meta name="author" content={SITE_AUTHOR} />
+    <meta name="keywords" content={SITE_KEYWORDS} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph — compartir en redes sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={SITE_TITLE} />
+    <meta property="og:description" content={SITE_DESCRIPTION} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={SITE_AUTHOR} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={SITE_TITLE} />
+    <meta name="twitter:description" content={SITE_DESCRIPTION} />
+    <meta name="twitter:image" content={ogImage} />
+    <!-- Descomenta y actualiza con tu handle: -->
+    <!-- <meta name="twitter:creator" content="@sarah_murcia" /> -->
+
+    <!-- Schema.org — Person JSON-LD para SEO semántico -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: SITE_AUTHOR,
+        url: canonicalBase.toString(),
+        jobTitle: 'UX/UI Designer & Frontend Developer',
+        description: SITE_DESCRIPTION,
+        knowsAbout: ['UX Design', 'UI Design', 'React', 'Figma', 'HTML', 'CSS', 'JavaScript'],
+        sameAs: [
+          // Reemplazar con tus URLs reales:
+          'https://linkedin.com/in/sarah-murcia',
+          'https://github.com/Sarah-mp',
+        ],
+      })}
+    />
+  </head>
+
+  <body>
+    <!-- Skip link: primer elemento del body para navegación por teclado -->
+    <SkipLink />
+    <slot />
+  </body>
+</html>
+
+<!-- ─── Script: prevenir FOUC al cambiar de tema ─────────────────────
+     Debe ejecutarse ANTES del primer paint para leer localStorage.
+     is:inline lo inyecta directamente en el HTML sin bundling. -->
+<script is:inline>
+  ;(() => {
+    if (typeof window === 'undefined') return
+    const stored = localStorage.getItem('theme')
+    const root = document.documentElement
+    if (stored === 'light' || stored === 'dark') {
+      root.dataset.theme = stored
+    }
+  })()
+</script>
+
+<!-- ─── Script: smooth scroll con offset para navbar fijo ────────────
+     Captura todos los clicks en <a href="#..."> y hace scroll suave
+     descontando la altura del navbar (data-site-header). -->
+<script is:inline>
+  ;(() => {
+    if (typeof window === 'undefined') return
+    const SCROLL_DURATION = 200
+    const EXTRA_OFFSET = 12
+
+    const easeLinear = (t) => t
+
+    const getHeaderOffset = () => {
+      const header = document.querySelector('[data-site-header]')
+      const height = header ? header.getBoundingClientRect().height : 0
+      return height + EXTRA_OFFSET
+    }
+
+    const smoothScrollTo = (targetY, duration = SCROLL_DURATION) => {
+      const startY = window.scrollY || window.pageYOffset
+      const diff = targetY - startY
+      if (Math.abs(diff) < 1) return
+
+      let startTime
+      const step = (timestamp) => {
+        if (startTime === undefined) startTime = timestamp
+        const elapsed = timestamp - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        const eased = easeLinear(progress)
+        window.scrollTo(0, startY + diff * eased)
+        if (elapsed < duration) requestAnimationFrame(step)
+      }
+
+      requestAnimationFrame(step)
+    }
+
+    const focusSection = (section) => {
+      if (!section) return
+      const isFocusable = section.matches('a, button, input, textarea, select, details, [tabindex]')
+      if (!isFocusable) {
+        section.setAttribute('tabindex', '-1')
+      }
+      section.focus({ preventScroll: true })
+    }
+
+    const scrollToHash = (hash) => {
+      if (!hash || hash === '#') return false
+      const id = decodeURIComponent(hash.slice(1))
+      const section = document.getElementById(id)
+      if (!section) return false
+
+      const targetTop = section.getBoundingClientRect().top + window.scrollY
+      const offsetTop = Math.max(0, targetTop - getHeaderOffset())
+      smoothScrollTo(offsetTop)
+      focusSection(section)
+      return true
+    }
+
+    document.addEventListener('click', (event) => {
+      if (event.defaultPrevented) return
+      if (event.button !== 0) return
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+
+      const target = event.target
+      const element = target instanceof Element ? target : target?.parentElement
+      if (!element) return
+
+      const anchor = element.closest('a[href^="#"]')
+      if (!anchor) return
+      if (anchor.target && anchor.target !== '_self') return
+
+      const href = anchor.getAttribute('href')
+      if (!href || !href.startsWith('#')) return
+
+      event.preventDefault()
+      if (!scrollToHash(href)) return
+      history.pushState(null, '', href)
+    })
+
+    window.addEventListener('hashchange', () => {
+      scrollToHash(window.location.hash)
+    })
+
+    if (window.location.hash) {
+      setTimeout(() => scrollToHash(window.location.hash), 80)
+    }
+  })()
+</script>
+
+<!-- ─── Script: IntersectionObserver para links activos en navbar ─────
+     Observa cada <section id="..."> y marca como activo el link
+     del navbar que apunta a la sección visible. -->
+<script is:inline>
+  ;(() => {
+    if (typeof window === 'undefined') return
+    const links = Array.from(document.querySelectorAll('[data-section-link]'))
+    const sections = Array.from(document.querySelectorAll('section[id]'))
+    if (!links.length || !sections.length) return
+
+    const setActive = (id) => {
+      const hash = `#${id}`
+      links.forEach((link) => {
+        link.classList.toggle('is-active', link.getAttribute('data-section-link') === hash)
+      })
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (!visible.length) return
+        setActive(visible[0].target.id)
+      },
+      {
+        rootMargin: '-40% 0px -50% 0px',
+        threshold: [0, 0.25, 0.6],
+      }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    const initial = window.location.hash?.slice(1)
+    if (initial) {
+      setActive(initial)
+    }
+  })()
+</script>

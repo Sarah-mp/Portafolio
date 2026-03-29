@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Fanwood+Text:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import 'tailwindcss';
+
+/* =============================================
+   BRAND KIT — extraído del archivo Figma
+   ============================================= */
+
+/* TEMA CLARO — default (earth tones elegantes) */
+:root {
+  /* Superficies */
+  --surface-primary: #faf7f4; /* crema — fondo principal */
+  --surface-secondary: #f0ebe3; /* fondo secundario / navbar */
+  --surface-card: #ffffff; /* fondo tarjetas */
+  --surface-input: #dedcd9; /* fondo inputs */
+
+  /* Colores de acento */
+  --color-primary: #512907; /* marrón oscuro — color principal */
+  --color-secondary: #98602f; /* marrón medio — hover / acento */
+  --color-accent: #c4a484; /* marrón claro — badges / detalles */
+
+  /* Bordes */
+  --color-border: #dedcd9;
+
+  /* Tipografía */
+  --text-primary: #1c1007;
+  --text-secondary: #6b5744;
+
+  /* Efectos */
+  --opacity-img: 0.08;
+  --card-glow-1: #c4a48440;
+  --card-glow-2: #98602f20;
+
+  /* Border radius — sistema consistente */
+  --radius-sm: 3px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-xl: 20px;
+  --radius-pill: 50px;
+}
+
+/* TEMA DARK — activado con data-theme="dark" */
+:root[data-theme='dark'] {
+  --surface-primary: #1c1007;
+  --surface-secondary: #2a1a0a;
+  --surface-card: #2e1e0e;
+  --surface-input: #3d2a18;
+
+  --color-primary: #c4a484;
+  --color-secondary: #98602f;
+  --color-accent: #512907;
+
+  --color-border: #3d2a18;
+
+  --text-primary: #faf7f4;
+  --text-secondary: #c4a484;
+
+  --opacity-img: 0.03;
+  --card-glow-1: #c4a48430;
+  --card-glow-2: #51290720;
+}
+
+/* =============================================
+   TIPOGRAFÍA
+   ============================================= */
+
+/* Escala tipográfica del Figma */
+.font-display {
+  font-family: 'Fanwood Text', Georgia, serif;
+}
+.font-body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.font-alt {
+  font-family: 'Crimson Pro', Georgia, serif;
+}
+
+/* =============================================
+   BASE RESET Y LAYOUT
+   ============================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset para el navbar flotante (~80px de altura) */
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--surface-primary);
+  overflow-x: hidden;
+  /* Transición suave al cambiar de tema */
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+/* Secciones: offset para el navbar fijo */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* =============================================
+   CONTENEDOR RESPONSIVO
+   ============================================= */
+
+.container-custom {
+  @apply mx-auto w-full max-w-6xl px-6 md:px-12;
+}
+
+/* =============================================
+   SKIP LINK — accesibilidad teclado
+   ============================================= */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1.25rem;
+  background: var(--color-primary);
+  color: #faf7f4;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 200ms ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* =============================================
+   FOCUS VISIBLE — outline global
+   ============================================= */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* =============================================
+   BOTONES — transición de escala consistente
+   ============================================= */
+
+button {
+  cursor: pointer;
+  transition: transform 150ms ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* =============================================
+   RESPETA PREFERENCIAS DE MOVIMIENTO REDUCIDO
+   ============================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

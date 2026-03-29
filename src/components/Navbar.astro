@@ -1,0 +1,189 @@
+---
+import ThemeController from './ThemeController.astro'
+import MobileMenu from './MobileMenu.astro'
+import { Briefcase, House, Menu, MessageCircle, Layers, Wrench } from 'lucide-react'
+
+// Navbar — barra de navegación flotante con smooth scroll
+// data-site-header: usado por el script de smooth scroll para calcular el offset
+// data-section-link: usado por IntersectionObserver para marcar link activo
+
+const navLinks = [
+  { href: '#hero', label: 'Inicio', icon: House },
+  { href: '#projects', label: 'Proyectos', icon: Briefcase },
+  { href: '#process', label: 'Proceso', icon: Layers },
+  { href: '#skills', label: 'Habilidades', icon: Wrench },
+  { href: '#contact', label: 'Contacto', icon: MessageCircle },
+]
+---
+
+<header class="flex w-full justify-center">
+  <nav
+    data-site-header
+    role="navigation"
+    aria-label="Navegación principal"
+    class="w-[95%] md:w-[90%] lg:max-w-5xl h-16 m-auto bg-(--surface-secondary)/85 backdrop-blur-md text-(--text-primary) flex justify-between items-center px-6 rounded-2xl fixed z-50 top-5 border border-(--color-border) shadow-sm"
+  >
+    <!-- Logo / nombre -->
+    <a
+      href="#hero"
+      class="font-display text-lg font-normal text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150 shrink-0"
+      style="font-family: 'Fanwood Text', Georgia, serif;"
+      aria-label="Sarah Murcia — ir al inicio"
+    >
+      Sarah Murcia
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="hidden lg:flex items-center gap-1" role="list">
+      {
+        navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              data-section-link={href}
+              class="nav-link px-3 py-1.5 text-sm rounded-lg text-(--text-secondary) hover:text-(--color-primary) transition-colors duration-150 relative"
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Controles desktop -->
+    <div class="hidden lg:flex items-center gap-3 text-(--color-primary)">
+      <ThemeController ariaLabel="Cambiar tema" />
+      <a
+        href="/cv-sarah-murcia.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-4 py-1.5 text-sm font-medium rounded-lg bg-(--color-primary) text-(--surface-primary) hover:bg-(--color-secondary) transition-colors duration-150"
+        aria-label="Descargar CV de Sarah Murcia (PDF)"
+      >
+        Descargar CV
+      </a>
+    </div>
+
+    <!-- Botón hamburguesa (mobile) -->
+    <button
+      id="mobile-menu-btn"
+      class="lg:hidden text-(--color-primary)"
+      aria-label="Abrir menú de navegación"
+      data-label-open="Abrir menú de navegación"
+      data-label-close="Cerrar menú de navegación"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <Menu aria-hidden="true" />
+    </button>
+  </nav>
+</header>
+
+<!-- Menú mobile — se renderiza fuera del nav para no afectar el stacking context -->
+<MobileMenu
+  navLinks={navLinks}
+  ariaLabel="Navegación principal móvil"
+  themeAriaLabel="Cambiar tema"
+/>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn')
+  const mobileMenu = document.getElementById('mobile-menu')
+
+  const isMobileMenuOpen = () => mobileMenu?.classList.contains('open')
+
+  const setMobileMenuState = (isOpen) => {
+    if (!mobileMenu) return
+    mobileMenu.classList.toggle('open', isOpen)
+    mobileMenu.setAttribute('aria-hidden', String(!isOpen))
+    if (menuBtn) {
+      menuBtn.setAttribute('aria-expanded', String(isOpen))
+      const label = isOpen ? menuBtn.dataset.labelClose : menuBtn.dataset.labelOpen
+      if (label) menuBtn.setAttribute('aria-label', label)
+    }
+  }
+
+  const focusFirstMenuLink = () => {
+    const firstLink = mobileMenu?.querySelector('a[href^="#"]')
+    if (firstLink instanceof HTMLElement) firstLink.focus({ preventScroll: true })
+  }
+
+  const openMobileMenu = () => {
+    if (!mobileMenu) return
+    setMobileMenuState(true)
+    requestAnimationFrame(focusFirstMenuLink)
+  }
+
+  const closeMobileMenu = ({ restoreFocus = true } = {}) => {
+    if (!isMobileMenuOpen()) return
+    setMobileMenuState(false)
+    if (restoreFocus && menuBtn instanceof HTMLElement) {
+      menuBtn.focus({ preventScroll: true })
+    }
+  }
+
+  const getClosestLink = (event) => {
+    if (typeof event.composedPath === 'function') {
+      for (const node of event.composedPath()) {
+        if (node?.nodeType === 1) {
+          const link = node.closest('a[href^="#"]')
+          if (link) return link
+        }
+      }
+    }
+    return event.target?.closest?.('a[href^="#"]') ?? null
+  }
+
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', (event) => {
+      event.stopPropagation()
+      isMobileMenuOpen() ? closeMobileMenu({ restoreFocus: true }) : openMobileMenu()
+    })
+
+    mobileMenu.addEventListener('click', (event) => {
+      event.stopPropagation()
+      if (getClosestLink(event)) closeMobileMenu({ restoreFocus: false })
+    })
+  }
+
+  document.addEventListener('click', () => closeMobileMenu({ restoreFocus: true }))
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMobileMenu()
+  })
+</script>
+
+<style>
+  /* Indicador subrayado en link activo */
+  a[data-section-link] {
+    position: relative;
+  }
+
+  a[data-section-link]::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 2px;
+    height: 1.5px;
+    border-radius: 20px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms ease;
+  }
+
+  a[data-section-link].is-active {
+    color: var(--color-primary);
+  }
+
+  a[data-section-link].is-active::after {
+    transform: scaleX(1);
+  }
+
+  #mobile-menu-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+</style>

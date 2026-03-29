@@ -1,0 +1,185 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro'
+import { ExternalLink, Github } from 'lucide-react'
+import { featuredProjects, otherProjects } from '../../data/projects.js'
+
+// Projects — muestra dos grids:
+//   1. "Proyectos destacados" (featured: true)  — tarjetas grandes
+//   2. "Otros proyectos"    (featured: false) — tarjetas compactas
+---
+
+<section id="projects" tabindex="-1" aria-label="Proyectos" class="py-20">
+  <div class="container-custom">
+    <SectionTitle
+      badge="Proyectos"
+      title="Mi trabajo"
+      subtitle="Proyectos de diseño UX/UI y desarrollo frontend que reflejan mi proceso creativo."
+    />
+
+    <!-- Proyectos destacados -->
+    {
+      featuredProjects.length > 0 && (
+        <>
+          <h3 class="text-sm uppercase tracking-widest text-(--text-secondary) mb-6">Destacados</h3>
+          <ul class="grid gap-6 sm:grid-cols-2 mb-16" role="list" aria-label="Proyectos destacados">
+            {featuredProjects.map((project) => (
+              <li>
+                <article
+                  class="project-card h-full flex flex-col rounded-xl border border-(--color-border) bg-(--surface-card) overflow-hidden hover:border-(--color-accent) transition-colors duration-200"
+                  aria-label={`Proyecto: ${project.title}`}
+                >
+                  {/* Imagen del proyecto */}
+                  <div
+                    class="w-full h-48 bg-(--surface-secondary) flex items-center justify-center text-(--text-secondary) text-xs"
+                    aria-hidden={!project.image}
+                  >
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={`Captura del proyecto ${project.title}`}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span class="opacity-40">Imagen próximamente</span>
+                    )}
+                  </div>
+
+                  {/* Contenido */}
+                  <div class="flex flex-col flex-1 p-6 gap-4">
+                    <div>
+                      <h4
+                        class="text-xl font-normal text-(--text-primary) mb-2"
+                        style="font-family: 'Fanwood Text', Georgia, serif;"
+                      >
+                        {project.title}
+                      </h4>
+                      <p class="text-sm text-(--text-secondary) leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Tags */}
+                    {project.tags?.length > 0 && (
+                      <ul class="flex flex-wrap gap-2" aria-label="Tecnologías usadas">
+                        {project.tags.map((tag) => (
+                          <li class="text-xs px-2.5 py-1 rounded-full border border-(--color-border) text-(--text-secondary)">
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {/* Links */}
+                    {(project.github || project.demo) && (
+                      <div class="flex items-center gap-3 mt-auto">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 text-xs text-(--text-secondary) hover:text-(--color-primary) transition-colors duration-150"
+                            aria-label={`Ver código de ${project.title} en GitHub (abre en nueva pestaña)`}
+                          >
+                            <Github className="w-3.5 h-3.5" aria-hidden="true" />
+                            Código
+                          </a>
+                        )}
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 text-xs text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150"
+                            aria-label={`Ver demo en vivo de ${project.title} (abre en nueva pestaña)`}
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                            Ver demo
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    <!-- Otros proyectos -->
+    {
+      otherProjects.length > 0 && (
+        <>
+          <h3 class="text-sm uppercase tracking-widest text-(--text-secondary) mb-6">
+            Otros proyectos
+          </h3>
+          <ul
+            class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            role="list"
+            aria-label="Otros proyectos"
+          >
+            {otherProjects.map((project) => (
+              <li>
+                <article
+                  class="project-card-sm flex flex-col gap-3 p-5 rounded-xl border border-(--color-border) bg-(--surface-card) hover:border-(--color-accent) transition-colors duration-200 h-full"
+                  aria-label={`Proyecto: ${project.title}`}
+                >
+                  <h4
+                    class="text-base font-normal text-(--text-primary)"
+                    style="font-family: 'Fanwood Text', Georgia, serif;"
+                  >
+                    {project.title}
+                  </h4>
+                  <p class="text-xs text-(--text-secondary) leading-relaxed flex-1">
+                    {project.description}
+                  </p>
+
+                  {project.tags?.length > 0 && (
+                    <ul class="flex flex-wrap gap-1.5" aria-label="Tecnologías usadas">
+                      {project.tags.map((tag) => (
+                        <li class="text-[10px] px-2 py-0.5 rounded-full border border-(--color-border) text-(--text-secondary)">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {(project.github || project.demo) && (
+                    <div class="flex items-center gap-3">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-xs text-(--text-secondary) hover:text-(--color-primary) transition-colors duration-150 inline-flex items-center gap-1"
+                          aria-label={`Ver código de ${project.title} (abre en nueva pestaña)`}
+                        >
+                          <Github className="w-3 h-3" aria-hidden="true" />
+                          GitHub
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-xs text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150 inline-flex items-center gap-1"
+                          aria-label={`Ver demo de ${project.title} (abre en nueva pestaña)`}
+                        >
+                          <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                          Demo
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </article>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </div>
+</section>

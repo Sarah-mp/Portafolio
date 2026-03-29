@@ -1,0 +1,5 @@
+# Cloudflare Pages — Redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Agregar aquí redirecciones si se necesitan en el futuro.
+# Ejemplo: /cv  /cv-sarah-murcia.pdf  302

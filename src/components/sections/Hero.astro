@@ -1,0 +1,120 @@
+---
+import { Linkedin, Mail, MessageCircle, Download } from 'lucide-react'
+
+// Hero — primera sección visible del portafolio
+// H1 con nombre grande (Fanwood Text, ~90px), subtítulo, CTA "Descargar CV"
+// y pills de contacto rápido: LinkedIn, Email, WhatsApp
+---
+
+<section
+  id="hero"
+  tabindex="-1"
+  aria-label="Presentación"
+  class="min-h-screen flex items-center pt-24 pb-20"
+>
+  <div class="container-custom">
+    <div class="max-w-4xl">
+      <!-- Badge / saludo -->
+      <p class="text-sm text-(--color-accent) uppercase tracking-widest mb-4 font-medium">
+        Bienvenido a mi portafolio
+      </p>
+
+      <!-- H1 — nombre principal (Fanwood Text, tipografía del Figma) -->
+      <h1
+        class="text-6xl sm:text-7xl md:text-8xl lg:text-[90px] leading-[0.95] font-normal text-(--text-primary) mb-6"
+        style="font-family: 'Fanwood Text', Georgia, serif;"
+      >
+        Hola!<br />
+        <span class="text-(--color-primary)">Sarah</span><br />
+        Murcia
+      </h1>
+
+      <!-- Subtítulo — rol profesional -->
+      <p
+        class="text-xl md:text-2xl text-(--text-secondary) mb-10 max-w-xl leading-relaxed"
+        style="font-family: 'Crimson Pro', Georgia, serif;"
+      >
+        UX/UI Design Junior & Frontend Junior
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap items-center gap-4">
+        <!-- CTA primario: Descargar CV -->
+        <a
+          href="/cv-sarah-murcia.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-primary) text-(--surface-primary) text-sm font-medium rounded-full hover:bg-(--color-secondary) transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-(--color-primary) focus-visible:outline-offset-2"
+          aria-label="Descargar CV de Sarah Murcia en formato PDF"
+        >
+          <Download className="w-4 h-4" aria-hidden="true" />
+          Descargar CV
+        </a>
+
+        <!-- Pills de contacto rápido -->
+        <div class="flex items-center gap-3" role="list" aria-label="Canales de contacto">
+          <a
+            href="https://linkedin.com/in/sarah-murcia"
+            target="_blank"
+            rel="noopener noreferrer"
+            role="listitem"
+            class="contact-pill"
+            aria-label="LinkedIn de Sarah Murcia (abre en nueva pestaña)"
+          >
+            <Linkedin className="w-4 h-4" aria-hidden="true" />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="mailto:sarah@email.com"
+            role="listitem"
+            class="contact-pill"
+            aria-label="Enviar email a Sarah Murcia"
+          >
+            <Mail className="w-4 h-4" aria-hidden="true" />
+            <span>Email</span>
+          </a>
+          <a
+            href="https://wa.me/573000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            role="listitem"
+            class="contact-pill"
+            aria-label="Contactar a Sarah Murcia por WhatsApp (abre en nueva pestaña)"
+          >
+            <MessageCircle className="w-4 h-4" aria-hidden="true" />
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    background: transparent;
+    transition:
+      border-color 150ms ease,
+      color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .contact-pill:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--card-glow-1);
+  }
+
+  .contact-pill:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+</style>

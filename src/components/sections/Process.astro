@@ -1,0 +1,97 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro'
+import { Search, Layers, Paintbrush, CheckCircle } from 'lucide-react'
+
+// Process — proceso de diseño en 4 pasos
+// Extraído del Figma: Investigación → Prototipos → Diseños finales → Validación
+// Desktop: pasos en fila con línea conectora
+// Mobile: stack vertical
+
+const steps = [
+  {
+    number: '01',
+    title: 'Investigación',
+    description:
+      'Entiendo el problema, los usuarios y el contexto. Entrevistas, benchmarking y análisis para tomar decisiones fundamentadas.',
+    icon: Search,
+  },
+  {
+    number: '02',
+    title: 'Prototipos',
+    description:
+      'Sketches, wireframes y prototipos de baja y alta fidelidad para explorar soluciones rápidamente antes de iterar.',
+    icon: Layers,
+  },
+  {
+    number: '03',
+    title: 'Diseños finales',
+    description:
+      'Interfaces detalladas con el sistema de diseño definido: componentes, espaciado, tipografía y paleta de colores.',
+    icon: Paintbrush,
+  },
+  {
+    number: '04',
+    title: 'Validación',
+    description:
+      'Pruebas de usabilidad con usuarios reales para verificar que la solución resuelve el problema correctamente.',
+    icon: CheckCircle,
+  },
+]
+---
+
+<section id="process" tabindex="-1" aria-label="Proceso de diseño" class="py-20">
+  <div class="container-custom">
+    <SectionTitle
+      badge="Proceso"
+      title="Cómo trabajo"
+      subtitle="Un proceso iterativo y centrado en el usuario para crear experiencias que realmente funcionan."
+    />
+
+    <!-- Grid de pasos -->
+    <ol
+      class="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+      aria-label="Pasos del proceso de diseño"
+    >
+      {/* Línea conectora desktop */}
+      <div
+        class="hidden lg:block absolute top-8 left-[calc(12.5%+1rem)] right-[calc(12.5%+1rem)] h-px bg-(--color-border)"
+        aria-hidden="true"
+      >
+      </div>
+
+      {
+        steps.map((step, index) => {
+          const Icon = step.icon
+          return (
+            <li class="relative flex flex-col gap-4">
+              {/* Número + ícono */}
+              <div class="flex items-center gap-3 lg:flex-col lg:items-start">
+                <div class="relative z-10 w-16 h-16 rounded-full border-2 border-(--color-border) bg-(--surface-card) flex items-center justify-center text-(--color-primary) shrink-0 lg:mb-2">
+                  <Icon className="w-6 h-6" aria-hidden="true" />
+                </div>
+                <span
+                  class="text-4xl font-normal text-(--color-border) lg:absolute lg:top-0 lg:right-0"
+                  style="font-family: 'Fanwood Text', Georgia, serif;"
+                  aria-hidden="true"
+                >
+                  {step.number}
+                </span>
+              </div>
+
+              {/* Texto */}
+              <div>
+                <h3
+                  class="text-lg font-normal text-(--text-primary) mb-2"
+                  style="font-family: 'Fanwood Text', Georgia, serif;"
+                >
+                  {step.title}
+                </h3>
+                <p class="text-sm text-(--text-secondary) leading-relaxed">{step.description}</p>
+              </div>
+            </li>
+          )
+        })
+      }
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+import Badge from './Badge.astro'
+
+// SectionTitle — agrupa Badge + H2 + subtítulo para consistencia entre secciones
+// Uso: <SectionTitle badge="Proyectos" title="Mi trabajo" subtitle="Descripción opcional" />
+interface Props {
+  badge: string
+  title: string
+  subtitle?: string
+  align?: 'left' | 'center'
+}
+
+const { badge, title, subtitle, align = 'left' } = Astro.props
+const alignClass = align === 'center' ? 'text-center items-center' : 'text-left items-start'
+---
+
+<div class:list={['flex flex-col gap-3 mb-12', alignClass]}>
+  <Badge>{badge}</Badge>
+  <h2
+    class="font-display text-4xl md:text-5xl font-normal leading-tight text-(--text-primary)"
+    style="font-family: 'Fanwood Text', Georgia, serif;"
+  >
+    {title}
+  </h2>
+  {
+    subtitle && (
+      <p class="text-(--text-secondary) text-base md:text-lg max-w-2xl leading-relaxed">
+        {subtitle}
+      </p>
+    )
+  }
+</div>

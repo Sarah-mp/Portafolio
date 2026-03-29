@@ -1,0 +1,91 @@
+---
+import ThemeController from './ThemeController.astro'
+
+// MobileMenu — menú de navegación para mobile
+// Recibe navLinks por props desde Navbar.astro
+// Se controla con las clases CSS 'open' vía JS en Navbar.astro
+const {
+  navLinks = [],
+  ariaLabel = 'Navegación principal',
+  themeAriaLabel = 'Cambiar tema',
+} = Astro.props
+
+const lastNavIndex = navLinks.length - 1
+---
+
+<section
+  id="mobile-menu"
+  class="mobile-menu fixed left-[3%] top-[4.8rem] w-[94%] lg:hidden text-(--text-primary) z-40 rounded-2xl bg-(--surface-secondary)/95 backdrop-blur-md border border-(--color-border) shadow-lg px-6 py-6"
+  aria-label={ariaLabel}
+  aria-hidden="true"
+>
+  <ul class="flex flex-col items-stretch gap-2 text-left">
+    {
+      navLinks.map(({ href, label, icon: Icon }, index) => (
+        <li class={index === lastNavIndex ? 'flex items-center gap-3' : ''}>
+          <a
+            href={href}
+            data-section-link={href}
+            class:list={[
+              'mobile-menu-link flex items-center justify-start gap-3 cursor-pointer text-base transition-colors duration-150 hover:text-(--color-primary)',
+              index === lastNavIndex ? 'flex-1' : 'w-full',
+            ]}
+          >
+            <span class="mobile-menu-icon text-(--color-accent)">
+              <Icon className="w-4 h-4" aria-hidden="true" />
+            </span>
+            <span>{label}</span>
+          </a>
+          {index === lastNavIndex && (
+            <div class="flex items-center justify-center">
+              <ThemeController ariaLabel={themeAriaLabel} />
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .mobile-menu {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-menu a.is-active {
+    color: var(--color-primary);
+  }
+
+  .mobile-menu a.is-active .mobile-menu-icon {
+    color: var(--color-primary);
+  }
+
+  .mobile-menu-link {
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .mobile-menu-link:hover {
+    background-color: var(--color-border);
+  }
+
+  .mobile-menu-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    background-color: var(--color-border);
+  }
+</style>

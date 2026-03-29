@@ -1,0 +1,73 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro'
+import {
+  Code,
+  Paintbrush,
+  Search,
+  Layers,
+  Palette,
+  Zap,
+  Github,
+  GitBranch,
+  Terminal,
+  LayoutGrid,
+} from 'lucide-react'
+import { skills } from '../../data/skills.js'
+
+// Skills — habilidades técnicas agrupadas por categoría
+// Los íconos se mapean por nombre desde skills.js
+
+const iconMap = {
+  figma: Palette,
+  search: Search,
+  layers: Layers,
+  palette: Paintbrush,
+  code: Code,
+  paintbrush: Paintbrush,
+  zap: Zap,
+  atom: LayoutGrid,
+  github: Github,
+  'kanban-square': LayoutGrid,
+  'git-branch': GitBranch,
+  terminal: Terminal,
+}
+---
+
+<section id="skills" tabindex="-1" aria-label="Habilidades" class="py-20 bg-(--surface-secondary)">
+  <div class="container-custom">
+    <SectionTitle
+      badge="Habilidades"
+      title="Mi stack"
+      subtitle="Herramientas y tecnologías que uso para diseñar y construir productos digitales."
+    />
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skills.map((group) => (
+          <div class="skills-group">
+            <h3 class="text-xs uppercase tracking-widest text-(--text-secondary) mb-4 font-medium">
+              {group.category}
+            </h3>
+            <ul
+              class="flex flex-wrap gap-2"
+              role="list"
+              aria-label={`Habilidades de ${group.category}`}
+            >
+              {group.items.map((skill) => {
+                const Icon = iconMap[skill.icon] ?? Code
+                return (
+                  <li>
+                    <span class="skill-tag inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-(--color-border) bg-(--surface-card) text-sm text-(--text-secondary) hover:border-(--color-accent) hover:text-(--color-primary) transition-colors duration-150">
+                      <Icon className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                      {skill.name}
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

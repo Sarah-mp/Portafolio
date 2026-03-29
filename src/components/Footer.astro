@@ -1,0 +1,53 @@
+---
+import { Github, Linkedin, Mail } from 'lucide-react'
+
+// Footer — pie de página con créditos y links sociales
+// role="contentinfo" es el landmark ARIA estándar para footer
+const currentYear = new Date().getFullYear()
+---
+
+<footer role="contentinfo" class="border-t border-(--color-border) bg-(--surface-secondary) py-10">
+  <div class="container-custom flex flex-col sm:flex-row items-center justify-between gap-4">
+    <!-- Nombre / marca -->
+    <p
+      class="font-display text-base text-(--text-primary)"
+      style="font-family: 'Fanwood Text', Georgia, serif;"
+    >
+      Sarah Murcia
+    </p>
+
+    <!-- Copyright -->
+    <p class="text-xs text-(--text-secondary) order-last sm:order-none">
+      &copy; {currentYear} Sarah Murcia. Todos los derechos reservados.
+    </p>
+
+    <!-- Links sociales -->
+    <nav aria-label="Redes sociales" class="flex items-center gap-4">
+      <a
+        href="https://github.com/Sarah-mp"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-(--text-secondary) hover:text-(--color-primary) transition-colors duration-150"
+        aria-label="GitHub de Sarah Murcia (abre en nueva pestaña)"
+      >
+        <Github className="w-4 h-4" aria-hidden="true" />
+      </a>
+      <a
+        href="https://linkedin.com/in/sarah-murcia"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-(--text-secondary) hover:text-(--color-primary) transition-colors duration-150"
+        aria-label="LinkedIn de Sarah Murcia (abre en nueva pestaña)"
+      >
+        <Linkedin className="w-4 h-4" aria-hidden="true" />
+      </a>
+      <a
+        href="mailto:sarah@email.com"
+        class="text-(--text-secondary) hover:text-(--color-primary) transition-colors duration-150"
+        aria-label="Enviar email a Sarah Murcia"
+      >
+        <Mail className="w-4 h-4" aria-hidden="true" />
+      </a>
+    </nav>
+  </div>
+</footer>

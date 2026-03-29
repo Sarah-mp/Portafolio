@@ -1,6 +1,6 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro'
-import { ExternalLink, Github } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
 import { featuredProjects, otherProjects } from '../../data/projects.js'
 
 // Projects — muestra dos grids:
@@ -90,11 +90,11 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 text-xs text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150"
+                            class="inline-flex items-center gap-1.5 text-xs text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150 font-medium"
                             aria-label={`Ver demo en vivo de ${project.title} (abre en nueva pestaña)`}
                           >
-                            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                            Ver demo
+                            Ver proyecto
+                            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                           </a>
                         )}
                       </div>
@@ -165,11 +165,11 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="text-xs text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150 inline-flex items-center gap-1"
+                          class="text-xs text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150 inline-flex items-center gap-1 font-medium"
                           aria-label={`Ver demo de ${project.title} (abre en nueva pestaña)`}
                         >
-                          <ExternalLink className="w-3 h-3" aria-hidden="true" />
-                          Demo
+                          Ver proyecto
+                          <ArrowRight className="w-3 h-3" aria-hidden="true" />
                         </a>
                       )}
                     </div>

@@ -5,30 +5,30 @@
    BRAND KIT — extraído del archivo Figma
    ============================================= */
 
-/* TEMA CLARO — default (earth tones elegantes) */
+/* TEMA CLARO — default */
 :root {
   /* Superficies */
-  --surface-primary: #faf7f4; /* crema — fondo principal */
-  --surface-secondary: #f0ebe3; /* fondo secundario / navbar */
+  --surface-primary: #f8fafc; /* fondo principal */
+  --surface-secondary: #f2f5f8; /* fondo secundario / navbar */
   --surface-card: #ffffff; /* fondo tarjetas */
-  --surface-input: #dedcd9; /* fondo inputs */
+  --surface-input: #e2e8f0; /* fondo inputs */
 
   /* Colores de acento */
-  --color-primary: #512907; /* marrón oscuro — color principal */
-  --color-secondary: #98602f; /* marrón medio — hover / acento */
-  --color-accent: #c4a484; /* marrón claro — badges / detalles */
+  --color-primary: #1565c0; /* azul — color principal */
+  --color-secondary: #229f78; /* verde — hover / acento */
+  --color-accent: #0097a7; /* teal — badges / detalles */
 
   /* Bordes */
-  --color-border: #dedcd9;
+  --color-border: #e2e8f0;
 
   /* Tipografía */
-  --text-primary: #1c1007;
-  --text-secondary: #6b5744;
+  --text-primary: #1f2937;
+  --text-secondary: #757575;
 
   /* Efectos */
   --opacity-img: 0.08;
-  --card-glow-1: #c4a48440;
-  --card-glow-2: #98602f20;
+  --card-glow-1: #1565c040;
+  --card-glow-2: #229f7820;
 
   /* Border radius — sistema consistente */
   --radius-sm: 3px;
@@ -40,23 +40,23 @@
 
 /* TEMA DARK — activado con data-theme="dark" */
 :root[data-theme='dark'] {
-  --surface-primary: #1c1007;
-  --surface-secondary: #2a1a0a;
-  --surface-card: #2e1e0e;
-  --surface-input: #3d2a18;
+  --surface-primary: #0d1b2a;
+  --surface-secondary: #1a2942;
+  --surface-card: #1e3354;
+  --surface-input: #2d3f5a;
 
-  --color-primary: #c4a484;
-  --color-secondary: #98602f;
-  --color-accent: #512907;
+  --color-primary: #60a5fa;
+  --color-secondary: #34d399;
+  --color-accent: #22d3ee;
 
-  --color-border: #3d2a18;
+  --color-border: #2d3f5a;
 
-  --text-primary: #faf7f4;
-  --text-secondary: #c4a484;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
 
-  --opacity-img: 0.03;
-  --card-glow-1: #c4a48430;
-  --card-glow-2: #51290720;
+  --opacity-img: 0.05;
+  --card-glow-1: #60a5fa30;
+  --card-glow-2: #34d39920;
 }
 
 /* =============================================
@@ -125,7 +125,7 @@ section {
   z-index: 9999;
   padding: 0.5rem 1.25rem;
   background: var(--color-primary);
-  color: #faf7f4;
+  color: #ffffff;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.875rem;

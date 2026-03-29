@@ -13,7 +13,7 @@ export const projects = [
     tags: ['UX Design', 'UI Design', 'Figma', 'Prototipado'],
     github: null,
     demo: null,
-    image: null, // Reemplazar con: import imageTuCivica from '../assets/img/tu-civica.png'
+    image: null,
     featured: true,
   },
   {
@@ -23,7 +23,7 @@ export const projects = [
     tags: ['UX Research', 'UI Design', 'Wireframing'],
     github: null,
     demo: null,
-    image: null,
+    image: '/img/reservas-card.png',
     featured: true,
   },
 

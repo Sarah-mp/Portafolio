@@ -1,107 +1,45 @@
 ---
-import SectionTitle from '../ui/SectionTitle.astro'
-import { Linkedin, Mail, MessageCircle } from 'lucide-react'
-
-// Contact — sección de contacto
-// Links directos: LinkedIn, Email, WhatsApp
+// Contact — sección minimalista estilo Figma
+// Tagline grande en italic + párrafo + email clickeable
 ---
 
-<section id="contact" tabindex="-1" aria-label="Contacto" class="py-20 bg-(--surface-secondary)">
-  <div class="container-custom">
-    <SectionTitle
-      badge="Contacto"
-      title="Hablemos"
-      subtitle="¿Tienes un proyecto en mente o quieres colaborar? Escríbeme, respondo rápido."
-      align="center"
-    />
+<section id="contact" tabindex="-1" aria-label="Contacto" class="py-32 text-center">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="tagline-heading mb-10">Creemos algo significativo juntos.</h2>
 
-    <nav
-      aria-label="Canales de contacto directo"
-      class="flex flex-col sm:flex-row justify-center gap-4 mt-10"
+    <p class="text-lg text-(--text-secondary) max-w-2xl mx-auto mb-12 leading-relaxed">
+      Actualmente estoy abierta a cubrir puestos junior, colaboraciones como freelance y
+      conversaciones sobre el futuro de la experiencia digital.
+    </p>
+
+    <a
+      href="mailto:sarah.murciapr@gmail.com"
+      class="contact-email-link"
+      aria-label="Enviar email a Sarah Murcia"
     >
-      <a
-        href="https://www.linkedin.com/feed/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="contact-direct-link"
-        aria-label="LinkedIn de Sarah Murcia (abre en nueva pestaña)"
-      >
-        <span class="contact-direct-icon">
-          <Linkedin className="w-5 h-5" aria-hidden="true" />
-        </span>
-        <div>
-          <p class="text-xs uppercase tracking-wider mb-0.5 opacity-70">LinkedIn</p>
-          <p class="text-sm font-medium">Sarah Murcia</p>
-        </div>
-      </a>
-
-      <a
-        href="mailto:sarah.murciapr@gmail.com"
-        class="contact-direct-link"
-        aria-label="Enviar email a Sarah Murcia"
-      >
-        <span class="contact-direct-icon">
-          <Mail className="w-5 h-5" aria-hidden="true" />
-        </span>
-        <div>
-          <p class="text-xs uppercase tracking-wider mb-0.5 opacity-70">Email</p>
-          <p class="text-sm font-medium">sarah.murciapr@gmail.com</p>
-        </div>
-      </a>
-
-      <a
-        href="https://wa.me/573205782884"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="contact-direct-link"
-        aria-label="Contactar por WhatsApp (abre en nueva pestaña)"
-      >
-        <span class="contact-direct-icon">
-          <MessageCircle className="w-5 h-5" aria-hidden="true" />
-        </span>
-        <div>
-          <p class="text-xs uppercase tracking-wider mb-0.5 opacity-70">WhatsApp</p>
-          <p class="text-sm font-medium">+57 320 578 2884</p>
-        </div>
-      </a>
-    </nav>
+      sarah.murciapr@gmail.com
+    </a>
   </div>
 </section>
 
 <style>
-  .contact-direct-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    border-radius: var(--radius-lg);
-    background: var(--color-secondary);
-    color: #ffffff;
-    transition:
-      opacity 150ms ease,
-      transform 150ms ease;
+  .contact-email-link {
+    font-family: 'Fanwood Text', Georgia, serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--color-secondary);
     text-decoration: none;
-    min-width: 200px;
+    transition: opacity 150ms ease;
   }
 
-  .contact-direct-link:hover {
-    opacity: 0.88;
-    transform: translateY(-2px);
+  .contact-email-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+    text-underline-offset: 6px;
   }
 
-  .contact-direct-link:focus-visible {
+  .contact-email-link:focus-visible {
     outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-
-  .contact-direct-icon {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 </style>

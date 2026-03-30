@@ -1,0 +1,109 @@
+---
+// About — sección de presentación personal
+// Estructura: título grande + bio (2 cols) + sección Habilidades con tags
+---
+
+<section id="about" tabindex="-1" aria-label="Sobre mí" class="py-20 about-section">
+  <div class="container-custom">
+    <!-- Bloque bio: título izq + texto + blob der -->
+    <div class="grid lg:grid-cols-2 gap-12 items-start mb-20">
+      <!-- Columna izquierda: título + bio -->
+      <div>
+        <h2 class="section-heading mb-10">About</h2>
+        <div class="space-y-6 text-base leading-relaxed text-(--text-primary)">
+          <p>
+            Diseñadora UI/UX Junior y estudiante de Ingeniería de Software con experiencia en diseño
+            de interfaces móviles y prototipado en Figma. Realicé mis prácticas profesionales en el
+            Metro de Medellín, participando en el diseño de interfaces para la nueva App Cívica y
+            colaborando con desarrolladores móviles para asegurar la correcta implementación de los
+            diseños.
+          </p>
+          <p>
+            Cuento con conocimientos en frontend (HTML, CSS, JavaScript y React), lo que facilita la
+            comunicación entre diseño y desarrollo. Me enfoco en crear interfaces intuitivas,
+            accesibles y centradas en la experiencia del usuario.
+          </p>
+        </div>
+      </div>
+
+      <!-- Columna derecha: blob decorativo -->
+      <div class="flex justify-center lg:justify-end items-start" aria-hidden="true">
+        <img src="/img/about-blob.png" alt="" class="about-blob" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Bloque Habilidades -->
+    <div class="text-center">
+      <h2 class="section-heading mb-4">Habilidades</h2>
+      <p class="text-base text-(--text-secondary) max-w-2xl mx-auto mb-10">
+        Habilidades enfocadas en el diseño de interfaces intuitivas, prototipado en Figma y
+        conocimientos en desarrollo frontend para una mejor integración entre diseño y desarrollo.
+      </p>
+
+      <!-- Tags fila única -->
+      <ul class="flex flex-wrap justify-center gap-3" role="list" aria-label="Habilidades técnicas">
+        {
+          [
+            { name: 'Figma', icon: '/icons/figma.svg' },
+            { name: 'HTML', icon: '/icons/html.svg' },
+            { name: 'CSS', icon: '/icons/css.svg' },
+            { name: 'React', icon: '/icons/react.svg' },
+            { name: 'JavaScript', icon: '/icons/javascript.svg' },
+            { name: 'Jira', icon: '/icons/jira.svg' },
+            { name: 'GitHub', icon: '/icons/github.svg' },
+          ].map((skill) => (
+            <li>
+              <span class="skill-tag">
+                <img src={skill.icon} alt="" aria-hidden="true" class="skill-icon" />
+                {skill.name}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background: linear-gradient(180deg, #e0d6ca 0%, var(--surface-primary) 100%);
+  }
+
+  .about-blob {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-accent);
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+    font-weight: 500;
+    transition:
+      border-color 150ms ease,
+      background 150ms ease,
+      color 150ms ease;
+  }
+
+  .skill-tag:hover {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+
+  .skill-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+  }
+</style>

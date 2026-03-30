@@ -5,30 +5,30 @@
    BRAND KIT — extraído del archivo Figma
    ============================================= */
 
-/* TEMA CLARO — default */
+/* TEMA CLARO — default (earth tones elegantes) */
 :root {
   /* Superficies */
-  --surface-primary: #f8fafc; /* fondo principal */
-  --surface-secondary: #f2f5f8; /* fondo secundario / navbar */
+  --surface-primary: #faf7f4; /* crema — fondo principal */
+  --surface-secondary: #f0ebe3; /* beige — fondo About / Skills */
   --surface-card: #ffffff; /* fondo tarjetas */
-  --surface-input: #e2e8f0; /* fondo inputs */
+  --surface-input: #dedcd9; /* fondo inputs */
 
   /* Colores de acento */
-  --color-primary: #1565c0; /* azul — color principal */
-  --color-secondary: #229f78; /* verde — hover / acento */
-  --color-accent: #0097a7; /* teal — badges / detalles */
+  --color-primary: #512907; /* marrón oscuro — color principal */
+  --color-secondary: #98602f; /* marrón medio — títulos / hover */
+  --color-accent: #c4a484; /* marrón claro — bordes / detalles */
 
   /* Bordes */
-  --color-border: #e2e8f0;
+  --color-border: #dedcd9;
 
   /* Tipografía */
-  --text-primary: #1f2937;
-  --text-secondary: #757575;
+  --text-primary: #1c1007;
+  --text-secondary: #6b5744;
 
   /* Efectos */
   --opacity-img: 0.08;
-  --card-glow-1: #1565c040;
-  --card-glow-2: #229f7820;
+  --card-glow-1: #c4a48440;
+  --card-glow-2: #98602f20;
 
   /* Border radius — sistema consistente */
   --radius-sm: 3px;
@@ -40,23 +40,23 @@
 
 /* TEMA DARK — activado con data-theme="dark" */
 :root[data-theme='dark'] {
-  --surface-primary: #0d1b2a;
-  --surface-secondary: #1a2942;
-  --surface-card: #1e3354;
-  --surface-input: #2d3f5a;
+  --surface-primary: #1c1007;
+  --surface-secondary: #2a1a0a;
+  --surface-card: #2e1e0e;
+  --surface-input: #3d2a18;
 
-  --color-primary: #60a5fa;
-  --color-secondary: #34d399;
-  --color-accent: #22d3ee;
+  --color-primary: #c4a484;
+  --color-secondary: #98602f;
+  --color-accent: #512907;
 
-  --color-border: #2d3f5a;
+  --color-border: #3d2a18;
 
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
+  --text-primary: #faf7f4;
+  --text-secondary: #c4a484;
 
-  --opacity-img: 0.05;
-  --card-glow-1: #60a5fa30;
-  --card-glow-2: #34d39920;
+  --opacity-img: 0.03;
+  --card-glow-1: #c4a48430;
+  --card-glow-2: #51290720;
 }
 
 /* =============================================
@@ -91,7 +91,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Crimson Pro', Georgia, serif;
   color: var(--text-primary);
   background-color: var(--surface-primary);
   overflow-x: hidden;
@@ -99,6 +99,10 @@ body {
   transition:
     background-color 200ms ease,
     color 200ms ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fanwood Text', Georgia, serif;
 }
 
 /* Secciones: offset para el navbar fijo */
@@ -111,7 +115,7 @@ section {
    ============================================= */
 
 .container-custom {
-  @apply mx-auto w-full max-w-6xl px-6 md:px-12;
+  @apply mx-auto w-full max-w-6xl px-6 md:px-8 lg:px-6;
 }
 
 /* =============================================
@@ -125,7 +129,7 @@ section {
   z-index: 9999;
   padding: 0.5rem 1.25rem;
   background: var(--color-primary);
-  color: #ffffff;
+  color: #faf7f4;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.875rem;
@@ -166,6 +170,48 @@ button:active {
 /* =============================================
    RESPETA PREFERENCIAS DE MOVIMIENTO REDUCIDO
    ============================================= */
+
+/* =============================================
+   TIPOGRAFÍA DE SECCIÓN — clases reutilizables
+   ============================================= */
+
+.section-heading {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: var(--color-secondary);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.section-heading-md {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-secondary);
+  font-weight: 400;
+}
+
+.tagline-heading {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: var(--color-secondary);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+/* =============================================
+   ICONOS SVG — adaptar en dark mode
+   Los SVGs tienen fill="#512907" hardcodeado,
+   se invierte con filter para dark mode
+   ============================================= */
+
+:root[data-theme='dark'] .skill-icon,
+:root[data-theme='dark'] .process-icon-img {
+  filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(1.4);
+}
+
+
+/* ============================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {

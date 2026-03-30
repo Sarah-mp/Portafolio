@@ -1,17 +1,15 @@
 ---
 import ThemeController from './ThemeController.astro'
 import MobileMenu from './MobileMenu.astro'
-import { Briefcase, House, Menu, MessageCircle, Layers, Wrench } from 'lucide-react'
+import { Download, Menu, User, Briefcase, MessageCircle } from 'lucide-react'
 
 // Navbar — barra de navegación flotante con smooth scroll
 // data-site-header: usado por el script de smooth scroll para calcular el offset
 // data-section-link: usado por IntersectionObserver para marcar link activo
 
 const navLinks = [
-  { href: '#hero', label: 'Inicio', icon: House },
+  { href: '#about', label: 'Sobre mi', icon: User },
   { href: '#projects', label: 'Proyectos', icon: Briefcase },
-  { href: '#process', label: 'Proceso', icon: Layers },
-  { href: '#skills', label: 'Habilidades', icon: Wrench },
   { href: '#contact', label: 'Contacto', icon: MessageCircle },
 ]
 ---
@@ -26,15 +24,15 @@ const navLinks = [
     <!-- Logo / nombre -->
     <a
       href="#hero"
-      class="font-display text-lg font-normal text-(--color-primary) hover:text-(--color-secondary) transition-colors duration-150 shrink-0"
+      class="text-xl font-normal text-(--color-secondary) hover:text-(--color-primary) transition-colors duration-150 shrink-0"
       style="font-family: 'Fanwood Text', Georgia, serif;"
-      aria-label="Sarah Murcia — ir al inicio"
+      aria-label="Portafolio — ir al inicio"
     >
-      Sarah Murcia
+      Portafolio
     </a>
 
     <!-- Links desktop -->
-    <ul class="hidden lg:flex items-center gap-1" role="list">
+    <ul class="hidden md:flex items-center gap-1" role="list">
       {
         navLinks.map(({ href, label }) => (
           <li>
@@ -51,23 +49,24 @@ const navLinks = [
     </ul>
 
     <!-- Controles desktop -->
-    <div class="hidden lg:flex items-center gap-3 text-(--color-primary)">
+    <div class="hidden md:flex items-center gap-3">
       <ThemeController ariaLabel="Cambiar tema" />
       <a
         href="/cv-sarah-murcia.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="px-4 py-1.5 text-sm font-medium rounded-lg bg-(--color-primary) text-(--surface-primary) hover:bg-(--color-secondary) transition-colors duration-150"
+        class="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium rounded-lg bg-(--color-secondary) text-(--surface-primary) hover:bg-(--color-primary) transition-colors duration-150"
         aria-label="Descargar CV de Sarah Murcia (PDF)"
       >
         Descargar CV
+        <Download className="w-3.5 h-3.5" aria-hidden="true" />
       </a>
     </div>
 
     <!-- Botón hamburguesa (mobile) -->
     <button
       id="mobile-menu-btn"
-      class="lg:hidden text-(--color-primary)"
+      class="md:hidden text-(--color-primary) bg-transparent border-0 p-1"
       aria-label="Abrir menú de navegación"
       data-label-open="Abrir menú de navegación"
       data-label-close="Cerrar menú de navegación"
@@ -154,7 +153,6 @@ const navLinks = [
 </script>
 
 <style>
-  /* Indicador subrayado en link activo */
   a[data-section-link] {
     position: relative;
   }
@@ -167,14 +165,14 @@ const navLinks = [
     bottom: 2px;
     height: 1.5px;
     border-radius: 20px;
-    background: var(--color-primary);
+    background: var(--color-secondary);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 220ms ease;
   }
 
   a[data-section-link].is-active {
-    color: var(--color-primary);
+    color: var(--color-secondary);
   }
 
   a[data-section-link].is-active::after {

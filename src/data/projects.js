@@ -14,7 +14,7 @@ export const projects = [
     tags: ['UX Design', 'UI Design', 'Figma', 'Prototipado'],
     demo: null,
     image: '/img/project-tu-civica.png',
-    accentColor: '#3D9B4A',
+    accentColor: '#61A210',
     featured: true,
   },
   {
@@ -26,7 +26,7 @@ export const projects = [
     tags: ['UX Research', 'UI Design', 'Wireframing'],
     demo: null,
     image: '/img/project-reservas.png',
-    accentColor: '#0D3B8C',
+    accentColor: '#004884',
     featured: true,
   },
   {
@@ -38,7 +38,7 @@ export const projects = [
     tags: ['UX Research', 'UI Design', 'Rediseño'],
     demo: null,
     image: '/img/project-universitario.png',
-    accentColor: '#0D7A6A',
+    accentColor: '#1E7F7F',
     featured: true,
   },
 
@@ -64,7 +64,7 @@ export const projects = [
     tags: ['UX Design', 'UI Design', 'Mobile'],
     demo: null,
     image: '/img/project-app-lectora.png',
-    accentColor: '#3D9B4A',
+    accentColor: '#61A210',
     featured: false,
   },
   {
@@ -76,7 +76,7 @@ export const projects = [
     tags: ['UX Design', 'UI Design', 'Web'],
     demo: null,
     image: '/img/project-cabanas.png',
-    accentColor: '#0D7A6A',
+    accentColor: '#1E7F7F',
     featured: false,
   },
 ]

@@ -205,8 +205,7 @@ button:active {
    se invierte con filter para dark mode
    ============================================= */
 
-:root[data-theme='dark'] .skill-icon,
-:root[data-theme='dark'] .process-icon-img {
+:root[data-theme='dark'] .skill-icon {
   filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(1.4);
 }
 

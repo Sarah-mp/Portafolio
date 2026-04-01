@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "lint": "eslint . --ext .js,.jsx,.astro",
     "lint:fix": "eslint . --ext .js,.jsx,.astro --fix",
     "typecheck": "astro check",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "lint-staged": {
     "*.{js,jsx,astro}": [
@@ -22,6 +24,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
+    "@astrojs/cloudflare": "^13.1.6",
     "@astrojs/react": "^5.0.2",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^6.1.1",
@@ -47,6 +50,10 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "wrangler": "^4.79.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }

@@ -2,8 +2,6 @@ import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
 
-import cloudflare from '@astrojs/cloudflare';
-
 // https://astro.build/config
 // PUBLIC_SITE_URL debe configurarse en Cloudflare Pages y localmente en .env
 export default defineConfig({
@@ -14,6 +12,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
-  adapter: cloudflare()
 })

@@ -5,10 +5,17 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
 // Projects — layout alternado para destacados, grid 3 cols para otros
 ---
 
-<section id="projects" tabindex="-1" aria-label="Proyectos" class="py-20">
+<section id="projects" tabindex="-1" aria-labelledby="projects-title" class="py-20">
   <div class="container-custom">
     <!-- Título principal -->
-    <h2 class="section-heading text-center mb-4">Proyectos</h2>
+    <h2 id="projects-title" class="section-heading text-center mb-4">Proyectos</h2>
+    <p
+      class="text-base text-(--text-secondary) text-center max-w-3xl mx-auto mb-14 leading-relaxed"
+    >
+      Selección de proyectos de UX/UI y producto digital donde participé en investigación,
+      estructura de información, diseño de interfaces y definición visual para experiencias web y
+      móviles.
+    </p>
 
     <!-- Proyectos destacados -->
     {
@@ -30,7 +37,7 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                       <div class="project-image-wrap">
                         <img
                           src={project.image}
-                          alt={`Captura del proyecto ${project.title}`}
+                          alt={project.imageAlt}
                           class="w-full h-full"
                           loading="lazy"
                         />
@@ -47,34 +54,37 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                       >
                         {project.title}
                       </h4>
-                      <p class="text-sm text-(--text-primary) mb-3">{project.shortDescription}</p>
-                      {project.reference && (
-                        <p class="text-xs text-(--text-secondary) mb-4">
-                          Referencia: {project.reference}
-                        </p>
-                      )}
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium transition-opacity duration-150 hover:opacity-85"
-                          style={`background-color: ${project.accentColor};`}
-                          aria-label={`Ver proyecto ${project.title} (abre en nueva pestaña)`}
-                        >
-                          Ver proyecto
-                          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                        </a>
-                      )}
-                      {!project.demo && (
-                        <span
-                          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium opacity-60 cursor-default"
-                          style={`background-color: ${project.accentColor};`}
-                        >
-                          Ver proyecto
-                          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                        </span>
-                      )}
+                      <p class="text-sm text-(--text-primary) mb-4">{project.shortDescription}</p>
+                      <div class="flex items-center justify-between gap-3">
+                        {project.reference ? (
+                          <p class="text-xs text-(--text-secondary)">
+                            Referencia: {project.reference}
+                          </p>
+                        ) : (
+                          <span />
+                        )}
+                        {project.demo ? (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium transition-opacity duration-150 hover:opacity-85 shrink-0"
+                            style={`background-color: ${project.accentColor};`}
+                            aria-label={`Ver proyecto ${project.title} (abre en nueva pestaña)`}
+                          >
+                            Ver proyecto
+                            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                          </a>
+                        ) : (
+                          <span
+                            class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium opacity-60 cursor-default shrink-0"
+                            style={`background-color: ${project.accentColor};`}
+                          >
+                            Ver proyecto
+                            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -103,9 +113,9 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
             aria-label="Otros proyectos"
           >
             {otherProjects.map((project) => (
-              <li>
+              <li class="flex">
                 <article
-                  class="other-card flex flex-col rounded-xl overflow-hidden bg-(--surface-secondary)"
+                  class="other-card flex flex-col w-full rounded-xl overflow-hidden bg-(--surface-secondary)"
                   aria-label={`Proyecto: ${project.title}`}
                 >
                   {/* Imagen */}
@@ -113,7 +123,7 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                     {project.image ? (
                       <img
                         src={project.image}
-                        alt={`Captura del proyecto ${project.title}`}
+                        alt={project.imageAlt}
                         class="w-full h-full"
                         loading="lazy"
                       />
@@ -132,16 +142,23 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                     >
                       {project.title}
                     </h4>
-                    <p class="text-sm text-(--text-primary) leading-relaxed flex-1">
+                    <p class="text-sm text-(--text-primary) leading-relaxed flex-1 line-clamp-3">
                       {project.shortDescription}
                     </p>
-                    <div class="mt-auto">
+                    <div class="mt-auto flex items-center justify-between gap-3">
+                      {project.reference ? (
+                        <p class="text-xs text-(--text-secondary)">
+                          Referencia: {project.reference}
+                        </p>
+                      ) : (
+                        <span />
+                      )}
                       {project.demo ? (
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium transition-opacity hover:opacity-85"
+                          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium transition-opacity hover:opacity-85 shrink-0"
                           style={`background-color: ${project.accentColor};`}
                           aria-label={`Ver proyecto ${project.title} (abre en nueva pestaña)`}
                         >
@@ -150,7 +167,7 @@ import { featuredProjects, otherProjects } from '../../data/projects.js'
                         </a>
                       ) : (
                         <span
-                          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium opacity-60 cursor-default"
+                          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm text-white font-medium opacity-60 cursor-default shrink-0"
                           style={`background-color: ${project.accentColor};`}
                         >
                           Ver proyecto

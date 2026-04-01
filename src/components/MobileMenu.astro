@@ -4,8 +4,14 @@ import ThemeController from './ThemeController.astro'
 // MobileMenu — menú de navegación para mobile
 // Recibe navLinks por props desde Navbar.astro
 // Se controla con las clases CSS 'open' vía JS en Navbar.astro
+interface NavLink {
+  href: string
+  label: string
+  icon: (_props: Record<string, unknown>) => unknown
+}
+
 const {
-  navLinks = [],
+  navLinks = [] as NavLink[],
   ariaLabel = 'Navegación principal',
   themeAriaLabel = 'Cambiar tema',
 } = Astro.props
@@ -13,7 +19,7 @@ const {
 const lastNavIndex = navLinks.length - 1
 ---
 
-<section
+<nav
   id="mobile-menu"
   class="mobile-menu fixed left-[3%] top-[4.8rem] w-[94%] lg:hidden text-(--text-primary) z-40 rounded-2xl bg-(--surface-secondary)/95 backdrop-blur-md border border-(--color-border) shadow-lg px-6 py-6"
   aria-label={ariaLabel}
@@ -21,7 +27,7 @@ const lastNavIndex = navLinks.length - 1
 >
   <ul class="flex flex-col items-stretch gap-2 text-left">
     {
-      navLinks.map(({ href, label, icon: Icon }, index) => (
+      navLinks.map(({ href, label, icon: Icon }, index: number) => (
         <li class={index === lastNavIndex ? 'flex items-center gap-3' : ''}>
           <a
             href={href}
@@ -45,7 +51,7 @@ const lastNavIndex = navLinks.length - 1
       ))
     }
   </ul>
-</section>
+</nav>
 
 <style>
   .mobile-menu {

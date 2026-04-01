@@ -8,7 +8,7 @@ import { Linkedin, Mail } from 'lucide-react'
 <section
   id="hero"
   tabindex="-1"
-  aria-label="Presentación"
+  aria-labelledby="hero-title"
   class="min-h-screen flex items-center pt-28 pb-20"
 >
   <div class="container-custom">
@@ -36,15 +36,17 @@ import { Linkedin, Mail } from 'lucide-react'
       </div>
 
       <!-- TÍTULO — order-1 mobile -->
-      <h1 class="hero-name mb-4 order-1 md:order-none w-full min-w-0">Hola! Sarah Murcia</h1>
+      <h1 id="hero-title" class="hero-name mb-4 order-1 md:order-none w-full min-w-0">
+        Sarah Murcia
+      </h1>
 
       <!-- SUBTÍTULO — order-2 mobile -->
       <div
         class="hero-subtitle mb-6 order-2 md:order-none w-full"
-        aria-label="UX/UI Design Junior & frontend junior"
+        aria-label="Diseñadora UX/UI y frontend junior"
       >
         <span class="hero-subtitle-line" aria-hidden="true"></span>
-        <span class="hero-subtitle-text">UX/UI Design Junior &amp; frontend junior</span>
+        <span class="hero-subtitle-text">Diseñadora UX/UI Junior &amp; Frontend Junior</span>
         <span class="hero-subtitle-line" aria-hidden="true"></span>
       </div>
 
@@ -52,9 +54,9 @@ import { Linkedin, Mail } from 'lucide-react'
       <p
         class="text-base text-(--text-secondary) leading-relaxed w-full mb-10 order-4 md:order-none"
       >
-        Creamos narrativas digitales mediante una estética cuidada y una lógica centrada en el
-        usuario. Nuestras creaciones se basan en la fusión del diseño inspirado en la tradición y la
-        ejecución técnica moderna.
+        Diseño interfaces web y móviles centradas en el usuario, con sensibilidad visual,
+        prototipado en Figma y criterio frontend para llevar conceptos claros a productos
+        accesibles, funcionales y listos para desarrollo.
       </p>
 
       <!-- PILLS — order-5 mobile -->

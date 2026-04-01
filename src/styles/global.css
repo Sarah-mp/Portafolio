@@ -30,6 +30,9 @@
   --card-glow-1: #c4a48440;
   --card-glow-2: #98602f20;
 
+  /* Gradiente sección About */
+  --about-gradient-start: #e0d6ca;
+
   /* Border radius — sistema consistente */
   --radius-sm: 3px;
   --radius-md: 7px;
@@ -57,6 +60,9 @@
   --opacity-img: 0.03;
   --card-glow-1: #c4a48430;
   --card-glow-2: #51290720;
+
+  /* Gradiente sección About */
+  --about-gradient-start: #2a1a0a;
 }
 
 /* =============================================

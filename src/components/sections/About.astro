@@ -3,13 +3,17 @@
 // Estructura: título grande + bio (2 cols) + sección Habilidades con tags
 ---
 
-<section id="about" tabindex="-1" aria-label="Sobre mí" class="py-20 about-section">
+<section id="about" tabindex="-1" aria-labelledby="about-title" class="py-20 about-section">
   <div class="container-custom">
     <!-- Bloque bio: título izq + texto + blob der -->
     <div class="grid lg:grid-cols-2 gap-12 items-start mb-40">
       <!-- Columna izquierda: título + bio -->
       <div>
-        <h2 class="section-heading mb-10">Sobre mi</h2>
+        <h2 id="about-title" class="section-heading mb-6">Sobre mí</h2>
+        <p class="text-base text-(--text-secondary) leading-relaxed max-w-2xl mb-10">
+          Perfil híbrido de diseño y frontend enfocado en traducir necesidades reales de negocio y
+          usuarios en experiencias claras, visuales y accesibles.
+        </p>
         <div class="space-y-6 text-base leading-relaxed text-(--text-primary)">
           <p>
             Diseñadora UI/UX Junior y estudiante de Ingeniería de Software con experiencia en diseño
@@ -34,10 +38,10 @@
 
     <!-- Bloque Habilidades -->
     <div class="text-center">
-      <h2 class="section-heading mb-4">Habilidades</h2>
+      <h3 class="section-heading mb-4">Habilidades y herramientas</h3>
       <p class="text-base text-(--text-secondary) max-w-2xl mx-auto mb-10">
-        Habilidades enfocadas en el diseño de interfaces intuitivas, prototipado en Figma y
-        conocimientos en desarrollo frontend para una mejor integración entre diseño y desarrollo.
+        Trabajo con investigación, diseño de interfaces, prototipado y fundamentos frontend para
+        mejorar la comunicación entre diseño, desarrollo y producto.
       </p>
 
       <!-- Tags fila única -->
@@ -67,7 +71,11 @@
 
 <style>
   .about-section {
-    background: linear-gradient(180deg, #e0d6ca 0%, var(--surface-primary) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--about-gradient-start) 0%,
+      var(--surface-primary) 100%
+    );
   }
 
   .about-blob {

@@ -1,21 +1,56 @@
 ---
 import '../styles/global.css'
 import SkipLink from '../components/ui/SkipLink.astro'
+import {
+  SITE_AUTHOR,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_LOCALE,
+  SITE_NAME,
+  SITE_OG_IMAGE_ALT,
+  SITE_OG_IMAGE_PATH,
+  SITE_ROLE,
+  SITE_TITLE,
+  SOCIAL_LINKS,
+  getAbsoluteUrl,
+  getSiteUrl,
+} from '../config/site'
 
-// ─── Datos del sitio ───────────────────────────────────────────────
-// Editar aquí para actualizar SEO en todo el sitio
-const SITE_TITLE = 'Sarah Murcia | UX/UI Designer & Frontend Developer'
-const SITE_DESCRIPTION =
-  'Portafolio de Sarah Murcia — UX/UI Design Junior y Frontend Junior. Proyectos de diseño centrado en el usuario y desarrollo web.'
-const SITE_AUTHOR = 'Sarah Murcia'
-const SITE_KEYWORDS =
-  'UX designer, UI designer, frontend developer, portafolio, diseño web, React, Figma'
-
-// ─── URLs canónicas ────────────────────────────────────────────────
-// Astro.site se define en astro.config.mjs via PUBLIC_SITE_URL
-const canonicalBase = Astro.site ?? new URL('http://localhost:4321')
-const canonicalUrl = new URL(Astro.url.pathname, canonicalBase).href
-const ogImage = new URL('/og-image.png', canonicalBase).href
+const siteUrl = getSiteUrl(Astro.site)
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href
+const ogImage = getAbsoluteUrl(SITE_OG_IMAGE_PATH, Astro.site).href
+const metadataKeywords = SITE_KEYWORDS.join(', ')
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: siteUrl.href,
+    inLanguage: 'es',
+    description: SITE_DESCRIPTION,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: SITE_AUTHOR,
+    url: siteUrl.href,
+    jobTitle: SITE_ROLE,
+    description: SITE_DESCRIPTION,
+    image: getAbsoluteUrl('/img/sarah-profile.png', Astro.site).href,
+    knowsAbout: [
+      'UX Design',
+      'UI Design',
+      'Accesibilidad web',
+      'Research',
+      'Figma',
+      'HTML',
+      'CSS',
+      'JavaScript',
+      'React',
+    ],
+    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
+  },
+]
 ---
 
 <!doctype html>
@@ -36,7 +71,8 @@ const ogImage = new URL('/og-image.png', canonicalBase).href
     <title>{SITE_TITLE}</title>
     <meta name="description" content={SITE_DESCRIPTION} />
     <meta name="author" content={SITE_AUTHOR} />
-    <meta name="keywords" content={SITE_KEYWORDS} />
+    <meta name="keywords" content={metadataKeywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph — compartir en redes sociales -->
@@ -45,37 +81,21 @@ const ogImage = new URL('/og-image.png', canonicalBase).href
     <meta property="og:title" content={SITE_TITLE} />
     <meta property="og:description" content={SITE_DESCRIPTION} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={SITE_OG_IMAGE_ALT} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="es_ES" />
-    <meta property="og:site_name" content={SITE_AUTHOR} />
+    <meta property="og:locale" content={SITE_LOCALE} />
+    <meta property="og:site_name" content={SITE_NAME} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={SITE_TITLE} />
     <meta name="twitter:description" content={SITE_DESCRIPTION} />
     <meta name="twitter:image" content={ogImage} />
-    <!-- Descomenta y actualiza con tu handle: -->
-    <!-- <meta name="twitter:creator" content="@sarah_murcia" /> -->
+    <meta name="twitter:image:alt" content={SITE_OG_IMAGE_ALT} />
 
     <!-- Schema.org — Person JSON-LD para SEO semántico -->
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: SITE_AUTHOR,
-        url: canonicalBase.toString(),
-        jobTitle: 'UX/UI Designer & Frontend Developer',
-        description: SITE_DESCRIPTION,
-        knowsAbout: ['UX Design', 'UI Design', 'React', 'Figma', 'HTML', 'CSS', 'JavaScript'],
-        sameAs: [
-          // Reemplazar con tus URLs reales:
-          'https://www.linkedin.com/in/sarah-murcia-prado-943435274',
-          'https://github.com/Sarah-mp',
-        ],
-      })}
-    />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
 
   <body>

@@ -23,6 +23,7 @@ const { ariaLabel = 'Cambiar tema' } = Astro.props
     const root = document.documentElement
     const storageKey = 'theme'
 
+    /** @param {string} theme */
     const setTheme = (theme) => {
       root.dataset.theme = theme
       document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {

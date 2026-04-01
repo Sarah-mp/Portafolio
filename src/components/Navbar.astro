@@ -19,14 +19,14 @@ const navLinks = [
     data-site-header
     role="navigation"
     aria-label="Navegación principal"
-    class="w-[95%] md:w-[90%] lg:max-w-5xl h-16 m-auto bg-(--surface-card) text-(--text-primary) flex justify-between items-center px-6 rounded-2xl fixed z-50 top-5 border border-(--color-border) shadow-sm"
+    class="w-[95%] md:w-[90%] lg:max-w-5xl h-16 m-auto bg-(--surface-card)/70 backdrop-blur-md text-(--text-primary) flex justify-between items-center px-6 rounded-2xl fixed z-50 top-5 border border-(--color-border)/60 shadow-sm"
   >
     <!-- Logo / nombre -->
     <a
       href="#hero"
       class="text-xl font-normal text-(--color-secondary) hover:text-(--color-primary) transition-colors duration-150 shrink-0"
       style="font-family: 'Fanwood Text', Georgia, serif;"
-      aria-label="Portafolio — ir al inicio"
+      aria-label="Portafolio de Sarah Murcia, ir al inicio"
     >
       Portafolio
     </a>
@@ -56,7 +56,7 @@ const navLinks = [
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium rounded-lg bg-(--color-secondary) text-(--surface-primary) hover:bg-(--color-primary) transition-colors duration-150"
-        aria-label="Descargar CV de Sarah Murcia (PDF)"
+        aria-label="Descargar hoja de vida de Sarah Murcia en PDF"
       >
         Descargar CV
         <Download className="w-3.5 h-3.5" aria-hidden="true" />
@@ -72,6 +72,7 @@ const navLinks = [
       data-label-close="Cerrar menú de navegación"
       aria-controls="mobile-menu"
       aria-expanded="false"
+      aria-haspopup="true"
     >
       <Menu aria-hidden="true" />
     </button>
@@ -91,6 +92,7 @@ const navLinks = [
 
   const isMobileMenuOpen = () => mobileMenu?.classList.contains('open')
 
+  /** @param {boolean} isOpen */
   const setMobileMenuState = (isOpen) => {
     if (!mobileMenu) return
     mobileMenu.classList.toggle('open', isOpen)
@@ -121,11 +123,13 @@ const navLinks = [
     }
   }
 
+  /** @param {Event} event */
   const getClosestLink = (event) => {
     if (typeof event.composedPath === 'function') {
       for (const node of event.composedPath()) {
-        if (node?.nodeType === 1) {
-          const link = node.closest('a[href^="#"]')
+        const el = node
+        if (el?.nodeType === 1) {
+          const link = el.closest('a[href^="#"]')
           if (link) return link
         }
       }

@@ -7,6 +7,7 @@ export const projects = [
   // ── PROYECTOS DESTACADOS ────────────────────────────────────────
   {
     title: 'Tu Civica',
+    type: 'Aplicativo Móvil',
     shortDescription:
       'Diseño UX/UI para la nueva experiencia móvil de la App Cívica del Metro de Medellín.',
     description:
@@ -21,6 +22,7 @@ export const projects = [
   },
   {
     title: 'Reservas de salones',
+    type: 'Diseño Web',
     shortDescription:
       'Diseño de interfaz para una plataforma web de reserva de salones institucionales.',
     description:
@@ -35,6 +37,7 @@ export const projects = [
   },
   {
     title: 'Proyecto universitario',
+    type: 'Proyecto Académico',
     shortDescription:
       'Rediseño académico de aplicaciones de transporte público con enfoque en usabilidad.',
     description:

@@ -1,5 +1,6 @@
 ---
 import ThemeController from './ThemeController.astro'
+import { Download } from 'lucide-react'
 
 // MobileMenu — menú de navegación para mobile
 // Recibe navLinks por props desde Navbar.astro
@@ -51,6 +52,20 @@ const lastNavIndex = navLinks.length - 1
       ))
     }
   </ul>
+
+  <!-- Separador + botón CV -->
+  <div class="mt-4 pt-4 border-t border-(--color-border)">
+    <a
+      href="/cv-sarah-murcia.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-sm font-medium bg-(--color-secondary) text-(--surface-primary) hover:bg-(--color-primary) transition-colors duration-150"
+      aria-label="Descargar hoja de vida de Sarah Murcia en PDF"
+    >
+      Descargar CV
+      <Download className="w-4 h-4" aria-hidden="true" />
+    </a>
+  </div>
 </nav>
 
 <style>
